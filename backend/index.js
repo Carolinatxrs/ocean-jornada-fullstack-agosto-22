@@ -7,5 +7,9 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 })
 
+app.get("/oi", function (req, res) {
+  res.send("Olá, mundo!");
+});
+
 //aplicação ouvindo na porta
 app.listen(3000)
