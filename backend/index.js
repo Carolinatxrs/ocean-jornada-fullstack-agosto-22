@@ -36,6 +36,8 @@ app.get("/pontuacoes", function (req, res) {
   res.send(lista);
 });
 //Endpoint CREATE - [POST] / pontuações
-
+app.get("/pontuacoes", function (req, res) {
+  res.send("Criar uma pontuação");
+});
 //aplicação ouvindo na porta
 app.listen(3000)
