@@ -33,7 +33,7 @@ const lista = [
 
 //Endpoint READ ALL - [GET] / pontuações
 app.get("/pontuacoes", function (req, res) {
-  res.send("Foiii");
+  res.send(lista);
 });
 //Endpoint CREATE - [POST] / pontuações
 
