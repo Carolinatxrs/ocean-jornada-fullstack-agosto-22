@@ -63,20 +63,20 @@ async function main(){
     res.send(itens);
   });
   //Endpoint CREATE - [POST] / pontuações
-  app.post("/pontuacoes", function (req, res) {
+  app.post("/pontuacoes", async function (req, res) {
     //Peguei o item do corpo da requisição
     const item = req.body;
     // console.log(item);
 
     //Adicionar o item na lista
-  
-    lista.push({
-      id: lista.length + 1,
-      nome: item.nome,
-      pontos: item.pontos,
-    });
+    // lista.push({
+    //   id: lista.length + 1,
+    //   nome: item.nome,
+    //   pontos: item.pontos,
+    // });
+    await collection.insertOne(item);
 
-    res.send("Item criado com sucesso");
+    res.send(item);
   });
 
   //aplicação ouvindo na porta
