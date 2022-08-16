@@ -14,67 +14,71 @@ async function main(){
   //Promises do JS, que permitem 
   //aguardar esse tempo. Para isso, vamos usar o async/await
 
-const cliente = await MongoClient.connect(url);
-const db = cliente.db(dbName);
-const collection = db.collection("pontuacoes");
+  console.log("Conectando com o banco de dados...");
 
-const app = express()
+  const cliente = await MongoClient.connect(url);
+  const db = cliente.db(dbName);
+  const collection = db.collection("pontuacoes");
 
-//Sinalizando para o express que estamos usando
-//JSON no body das requisições
-app.use(express.json());
+  const app = express()
 
-//cria o endpoint principal
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
+  //Sinalizando para o express que estamos usando
+  //JSON no body das requisições
+  app.use(express.json());
 
-app.get("/oi", function (req, res) {
-  res.send("Olá, mundo!");
-});
+  //cria o endpoint principal
+  app.get('/', function (req, res) {
+    res.send('Hello World')
+  })
 
-//Backend armazena a pontuação das jogadas
-//Criar a lista com as pontuações
-const lista = [
-  {
-    id: 1,
-    nome: "Paulo",
-    pontos: 90,
-  },
-  {
-    id: 2,
-    nome: "Daniel",
-    pontos: 52,
-  },
-  {
-    id: 3,
-    nome: "Carolina",
-    pontos: 97,
-  },
-];
-
-//Endpoint READ ALL - [GET] / pontuações
-app.get("/pontuacoes", function (req, res) {
-  res.send(lista);
-});
-//Endpoint CREATE - [POST] / pontuações
-app.post("/pontuacoes", function (req, res) {
-  //Peguei o item do corpo da requisição
-  const item = req.body;
-  // console.log(item);
-
-  //Adicionar o item na lista
-  lista.push({
-    id: lista.length + 1,
-    nome: item.nome,
-    pontos: item.pontos,
+  app.get("/oi", function (req, res) {
+    res.send("Olá, mundo!");
   });
 
-  res.send("Item criado com sucesso");
-});
-//aplicação ouvindo na porta
-app.listen(3000);
+  //Backend armazena a pontuação das jogadas
+  //Criar a lista com as pontuações
+  const lista = [
+    {
+      id: 1,
+      nome: "Paulo",
+      pontos: 90,
+    },
+    {
+      id: 2,
+      nome: "Daniel",
+      pontos: 52,
+    },
+    {
+      id: 3,
+      nome: "Carolina",
+      pontos: 97,
+    },
+  ];
 
-//Executando a função main
-main();
+  //Endpoint READ ALL - [GET] / pontuações
+  app.get("/pontuacoes", function (req, res) {
+    res.send(lista);
+  });
+  //Endpoint CREATE - [POST] / pontuações
+  app.post("/pontuacoes", function (req, res) {
+    //Peguei o item do corpo da requisição
+    const item = req.body;
+    // console.log(item);
+
+    //Adicionar o item na lista
+  
+    lista.push({
+      id: lista.length + 1,
+      nome: item.nome,
+      pontos: item.pontos,
+    });
+
+    res.send("Item criado com sucesso");
+  });
+
+  //aplicação ouvindo na porta
+  app.listen(3000);
+
+  //Executando a função main
+  main();
 }
