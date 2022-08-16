@@ -20,6 +20,8 @@ async function main(){
   const db = cliente.db(dbName);
   const collection = db.collection("pontuacoes");
 
+  console.log("Banco de dados conectado com sucesso!");
+
   const app = express()
 
   //Sinalizando para o express que estamos usando
@@ -78,7 +80,7 @@ async function main(){
 
   //aplicação ouvindo na porta
   app.listen(3000);
-
-  //Executando a função main
-  main();
 }
+
+//Executando a função main
+main();
