@@ -39,7 +39,7 @@ async function main(){
 
   //Backend armazena a pontuação das jogadas
   //Criar a lista com as pontuações
-  const lista = [
+  /*const lista = [
     {
       id: 1,
       nome: "Paulo",
@@ -55,11 +55,16 @@ async function main(){
       nome: "Carolina",
       pontos: 97,
     },
-  ];
+  ]; */
 
   //Endpoint READ ALL - [GET] / pontuações
+  //sort ordenar e limit limita a quantidade de dados
   app.get("/pontuacoes", async function (req, res) {
-    const itens = await collection.find().toArray();
+    const itens = await collection
+    .find()
+    .sort({ pontos: -1})
+    .limit(10)
+    .toArray();
     res.send(itens);
   });
   //Endpoint CREATE - [POST] / pontuações
