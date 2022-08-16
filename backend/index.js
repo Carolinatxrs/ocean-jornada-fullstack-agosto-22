@@ -1,5 +1,23 @@
 //cria aplicação utilizando o express
-const express = require('express')	
+const express = require('express');
+const { MongoClient } = require('mongodb');
+
+const url = "mongodb://localhost:27017";
+const dbName = "jornada-fullstack-agosto-22";
+
+//Declaração da função main
+async function main(){
+  //Realizar a conexão com o MongoClient
+  //MongoClient -> MongoDatastore -> MongoCollection
+  //Conexões com o client podem levar um tempo para
+  //concluir. Portanto, utilizamos o mecanismo de 
+  //Promises do JS, que permitem 
+  //aguardar esse tempo. Para isso, vamos usar o async/await
+
+const cliente = await MongoClient.connect(url);
+const db = cliente.db(dbName);
+const collection = db.collection("pontuacoes");
+
 const app = express()
 
 //Sinalizando para o express que estamos usando
@@ -55,4 +73,8 @@ app.post("/pontuacoes", function (req, res) {
   res.send("Item criado com sucesso");
 });
 //aplicação ouvindo na porta
-app.listen(3000)
+app.listen(3000);
+
+//Executando a função main
+main();
+}
