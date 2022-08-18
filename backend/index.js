@@ -85,7 +85,7 @@ async function main(){
   });
 
   //aplicação ouvindo na porta
-  app.listen(3000);
+  app.listen(process.env.PORT || 3000);
 }
 
 //Executando a função main
